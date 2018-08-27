@@ -1,32 +1,15 @@
-// Figure 2 interactively loads static images, stored locally
-function update_figure_2() {
-  var period = document.getElementById("Figure_2_period").value;
-  var filename = "./images/figure_2/period_" + period + ".svg";
-  var image = document.getElementById("Figure_2_image");
-  image.src = filename;
-}
-
-// Figure 3 interactively loads static images.
-// Check if our big images are available locally or remotely:
-var big_image_directory = "./../big_images";
-var img = new Image();
-img.onerror = function() {
-  window.big_image_directory = "https://andrewgyork.github.io/publication_template_data/big_images";
-  img.onerror = function() {
-    window.big_image_directory = "";
-    img.onerror = "";
-    window.alert("Interactive images not found.");
+// Figure 1 interactively loads static images, stored locally
+function update_figure_1() {
+  var options = ['interferometer_1.svg',
+                 'interferometer_2.svg',
+                 'interferometer_3.svg',
+                 'interferometer_4.svg']
+  for (var i = 0; i < 4; i++) {
+    var radio_button = document.getElementById(options[i]);
+    if (radio_button.checked) {
+      var filename = "./images/interferometer/" + options[i];
+    }
   }
-  img.src = big_image_directory + "/figure_3/period_000004.svg"
-}
-img.onload = function() {
-  console.log("Loading interactive images from: " + big_image_directory)
-}
-img.src = big_image_directory + "/figure_3/period_000004.svg"
-
-function update_figure_3() {
-  var period = document.getElementById("Figure_3_period").value;
-  var filename = big_image_directory + "/figure_3/period_" + period + ".svg";
-  var image = document.getElementById("Figure_3_image");
+  var image = document.getElementById("Figure_1_image");
   image.src = filename;
 }

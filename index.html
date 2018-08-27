@@ -53,12 +53,23 @@ The real text begins here.
  -->
 <section>
 <h1>Micro-publication</h1>
-<h2>Question: Can adaptive interference improve our ability to infer intensity and phase?</h2>
+<h2>What is the signal-to-noise ratio of phase-contrast imaging?</h2>
 <p class="author_list">Andrew G. York<sup>1*</sup></p>
 <p class="author_affiliations"><sup>1</sup>Calico Life Sciences LLC, South San Francisco, CA 94080, USA</p>
 <p class="contact_email"><sup>*</sup>Permanent email: <a href="mailto:andrew.g.york+inference@gmail.com" target="_self">andrew.g.york+inference@gmail.com</a></p>
-<p class="abstract">A mathematical optimization problem, inspired by the physics of interferometry.</p>
-<p><a href="https://doi.org/10.5281/zenodo.231328">doi: 10.5281/zenodo.231328</a></p>
+<p class="contact_email"><sup>*</sup>Institutional email: <a href="mailto:agy+inference@calicolabs.com" target="_self">agy+inference@calicolabs.com</a></p>
+<p class="abstract">A mathematical optimization problem, inspired by the physics of interferometry. How much can tuning the intensity and phase of an interfering reference beam improve our ability to infer the absorption and phase shift due to an unknown object?
+</p>
+<table>
+  <tr>
+    <td><a href="./index.html#math_puzzle" target="_self">Click here if you like math</a></td>
+    <td><a href="./index.html#coding_challenge" target="_self">Click here if you like coding</a></td>
+    <td><a href="./index.html#physics_question" target="_self">Click here if you like physics</a></td>
+  </tr>
+</table>
+
+
+<p><a href="https://doi.org/FIXME">doi: 10.5281/zenodo.FIXME</a></p>
 
 <h3 class="onlyprint">
 Note that this is a limited PDF or print version; animated and interactive figures are disabled. For the full version of this article, please visit <a href="https://andrewgyork.github.io/publication_template">https://andrewgyork.github.io/publication_template</a></h3>
@@ -66,32 +77,33 @@ Note that this is a limited PDF or print version; animated and interactive figur
 <noscript>
 <h3>Your browser doesn't seem to support Javascript. This document uses Javascript for interactive figures, math typesetting, and to automatically generate the reference list. Either activate Javascript, or use the "Download PDF" link above if you want properly typeset math and a reference list.</h3></noscript>
 
-<h3>
-Let's play a game</h3>
-<p>I know a complex number \(x\). Your job is to infer \(x\). You know that \(|x| \leq 1\). <a href="./index.html#note_1" target="_self" title="I'll choose the magnitude |x| from a uniform distribution between 0 and 1, and I'll choose the phase arg(x) from a uniform distribution between 0 and 2pi. Bonus points if your algorithm works robustly (or can be easily adapted) if 'x' is drawn from a different distribution.
+<h3 id="math_puzzle">
+A math puzzle</h3>
+<p>Let's play a game. I know a complex number \(x\). Your job is to infer \(x\). You know that \(|x| \leq 1\). <a href="./index.html#note_1" target="_self" title="For Bayesians: I'll choose the magnitude |x| from a uniform distribution between 0 and 1, and I'll choose the phase arg(x) from a uniform distribution between 0 and 2pi. Bonus points if your algorithm works robustly (or can be easily adapted) if 'x' is drawn from a different distribution.
 ">*</a></p>
 
 <p>You may choose any two complex numbers, \(a\) and \(b\). I will calculate \(y = |(ax + b)|^2\). Then I'll draw randomly from a Poisson distribution with expectation value \(y\), and tell you the (stochastic) result \(R\).</p>
 
-<p>We repeat this process as many times as you'd like: on round \(i\), you choose \(a_i\) and \(b_i\), I'll calculate \(y_i\) and I'll tell you \(R_i\). Your "cost" for round \(i\) is the quantity \(|a_i|^2\), and you have a "budget" of \(A\). If you go over budget (meaning, if you choose a value \(a_N\) such that A < \(\sum_i^N |a_i|^2\)), I won't answer, and the game is over.</p>
+<p>We repeat this process as many times as you'd like: on round \(i\), you choose \(a_i\) and \(b_i\), I'll calculate \(y_i\) and I'll tell you \(R_i\). Your "cost" for round \(i\) is the quantity \(|a_i|^2\), and you have a "budget" of \(A\). If you go over budget (meaning, if you choose a value \(a_N\) such that \(A \lt \sum_i^N |a_i|^2\)), I won't answer, and the game is over.</p>
 
-<p>What algorithm should you follow to infer \(x\) as accurately <a href="./index.html#note_2" target="_self" title="Note I didn't define 'accuracy'! I'll leave this intentionally flexible. I suspect the 'ideal' algorithm will depend on the choice of definition, but I'm indifferent as long as your definition of accuracy seems sane to me.">**</a> as possible, for a given value of \(A\)? Ideally, express this algorithm as a short Python/Numpy script, ideally in a Github repo that I can link to here. Feel free to invite anyone who's interested to play.</p>
+<p>What algorithm should you follow to infer \(x\) as accurately<a href="./index.html#note_2" target="_self" title="Note I didn't define 'accuracy'! I'll leave this intentionally flexible. I suspect the 'ideal' algorithm will depend on the choice of definition, but I'm indifferent as long as your definition of accuracy seems sane to me.">**</a> as possible, for a given value of \(A\)? Ideally, express this algorithm as a short Python/Numpy script, ideally in a Github repo that I can link to here. Feel free to invite anyone who's interested to play.</p>
 
 <p>Let the best algorithm win!</p>
 
 <ul>
   <li>Can you do any better than the algorithm \(a_0 = A\), \(b_0 = 0\) ?</li>
-  <li>Can you do any better than the algorithm where \(a_i\) and \(b_i\) are chosen in advance, independently of \(R_i\)?</li>
+  <li>Can you do any better than an algorithm where \(a\) and \(b\) are chosen in advance, independently of \(R_k\)? For example: \(a_k = \sqrt{A/N}\) and \(b_k = \sqrt{A/N}e^{2\pi i k / N}\)</li>
 </ul>
 
-<p id="note_1"><a href="./index.html#note_1" target="_self">*</a> I'll choose the magnitude \(|x|\) from a uniform distribution between \(0\) and \(1\), and I'll choose the phase \(\arg(x)\) from a uniform distribution between \(0\) and \(2\pi\). Bonus points if your algorithm works robustly (or can be easily adapted) if \(x\) is drawn from a different distribution.
+<h4>Notes:</h4>
+<p id="note_1"><a href="./index.html#note_1" target="_self">*</a> For Bayesians: I'll choose the magnitude \(|x|\) from a uniform distribution between \(0\) and \(1\), and I'll choose the phase \(\arg(x)\) from a uniform distribution between \(0\) and \(2\pi\). Bonus points if your algorithm works robustly (or can be easily adapted) if \(x\) is drawn from a different distribution.
 </p>
 
 <p id="note_2"><a href="./index.html#note_2" target="_self">**</a> Note I didn't define 'accuracy'! I'll leave this intentionally flexible. I suspect the "ideal" algorithm will depend on the choice of definition, but I'm indifferent as long as your definition of accuracy seems sane to me.</p>
 
-<h3>
-Code</h3>
-<p>I've implemented an 'oracle' that will play this game with you in Python 3: <a href="./code/game.py">./code/game.py</a></p>
+<h3 id="coding_challenge">
+A coding challenge</h3>
+<p>I've implemented an 'oracle' that will play <a href="./index.html#math_puzzle" target="_self">a game</a> with you. You can find a copy of the Python 3 code in our <code>adaptive_interference_inference</code> GitHub repository: <a href="./code/game.py">./code/game.py</a></p>
 <pre><code class="language-python">import numpy as np
 
 class Oracle:
@@ -128,6 +140,7 @@ class Oracle:
         return R
 </code></pre>
 <p></p>
+<p>To play this game, import <code>game.py</code>, create an instance of the <code>Oracle</code> object, and try to infer the value of <code>Oracle._magnitude</code> and/or <code>Oracle._phase</code> as accurately as you can, using only calls to the <code>Oracle.ask(a, b)</code> method. You are allowed to inspect the code of <code>game.py</code>, but after you instantiate an <code>Oracle</code> object, you are <em>not</em> allowed to inspect its <code>Oracle._x</code>, <code>Oracle._magnitude</code>, or <code>Oracle._phase</code> attributes; that's cheating!</p>
 <p>Here's an example of how you might use this oracle to play the game:</p>
 <pre><code class="language-python">import game
 print("An example game")
@@ -149,13 +162,30 @@ print("An example game")
     print("\nIf you'd made smarter choices of 'a' and 'b' on each round,\n",
           "could you do a better job inferring 'x'?", sep='')</code></pre>
 
-<p>Note that this is just an example of how to ask the oracle questions. I didn't specify an inference method to infer \(x\) based on the oracle's responses \(R_i\). That's the game!</p>
+<p>Note that this is just an example of how to ask the oracle questions. I didn't specify an inference method to infer <code>Oracle._x</code> based on the oracle's responses to <code>Oracle.ask(a, b)</code>. That's the game!</p>
 
+<p>What's the best algorithm you can implement to infer the value of <code>Oracle._x</code> as accurately<a href="./index.html#note_2" target="_self" title="Note I didn't define 'accuracy'! I'll leave this intentionally flexible. I suspect the 'ideal' algorithm will depend on the choice of definition, but I'm indifferent as long as your definition of accuracy seems sane to me.">**</a> as possible, for a given value of <code>Oracle.budget</code>? Ideally, express this algorithm as a short Python/Numpy script, ideally in a Github repo that I can link to here. Feel free to invite anyone who's interested to play.</p>
 
-<h3>
-Motivation</h3>
+<h3 id="physics_question">
+A physics question</h3>
+What is the signal-to-noise ratio of phase contrast imaging?
 
+<figure id="Figure_1">
+<img src="./images/interferometer/interferometer_1.svg"
+ alt="Figure 1" id="Figure_1_image">
+<table class="figure_controls">
+  <tr>
+  <td>Measurement type: </td><td><form id="Figure_1_measurement" onchange="update_figure_1()">
+    <input type="radio" name="measurement" id="interferometer_1.svg" checked="checked">Intensity measurement<br>
+    <input type="radio" name="measurement" id="interferometer_2.svg">Interferometric measurement<br>
+    <input type="radio" name="measurement" id="interferometer_3.svg">Background intensity measurement<br>
+    <input type="radio" name="measurement" id="interferometer_4.svg">Object-free interferometric measurement<br>
+  </form></td></tr>
+</table>
+<figcaption><strong>Figure 2: An interactive figure using local images.</strong> This figure's images were pre-generated by <code>/figure_generation/figure_2.py</code>, and switched dynamically by <code>/javascript/update_figures.js</code>. </figcaption>
+</figure><p></p>
 
+<!--
 <h3>
 Introduction</h3>
 <p>
@@ -265,7 +295,7 @@ Static and interactive figures</h3>
 </table>
 <figcaption><strong>Figure 3: An interactive figure using images that aren't stored in this repository.</strong> This figure's images were pre-generated by <code>/figure_generation/figure_3.py</code>, and switched dynamically by <code>/javascript/update_figures.js</code>. </figcaption>
 </figure><p></p>
-
+-->
 <noscript>
 <h3>Your browser doesn't seem to support Javascript. This document uses Javascript to generate a reference list, which would normally be displayed here. Either activate Javascript, or use the "Download PDF" link above if you want to see the reference list.</h3></noscript>
 
