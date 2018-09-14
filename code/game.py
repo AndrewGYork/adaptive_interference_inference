@@ -10,7 +10,7 @@ class Oracle:
         self.round = 0
         self.a_history = []
         self.b_history = []
-        self.R_history = []
+        self.r_history = []
         self.game_over = False
         
         # Generate some secret numbers.
@@ -28,29 +28,31 @@ class Oracle:
             self.game_over = True
             return None
         y = np.abs(a*self._x + b)**2
-        R = np.random.poisson(y)
+        r = np.random.poisson(y)
         self.round += 1
         self.a_history.append(a)
         self.b_history.append(b)
-        self.R_history.append(R)
-        return R
+        self.r_history.append(r)
+        return r
 
 if __name__ == '__main__':
     print("An example game")
     oracle = Oracle(budget=1000)
     print("Budget:", oracle.budget, '\n')
-    while not oracle.game_over:
+    num_phases = 5
+    for phase_angle in np.arange(0, 2*np.pi, 2*np.pi/num_phases):
         print('Round', oracle.round)
-        print('Total cost so far: %0.2f / %0.2f'%(oracle.total_cost, oracle.budget))
-        a = 40*np.random.random(1)*np.exp(1j*2*np.pi*np.random.random(1))
-        b = 40*np.random.random(1)*np.exp(1j*2*np.pi*np.random.random(1))
+        a = np.sqrt(oracle.budget / num_phases) * (1 - 1e-12)
+        b = a * np.exp(1j*phase_angle)
         print(' a: %07s    (intensity)\n'%('%0.2f'%(np.abs(a)**2)),
                '   %07s*pi (phase)'%('%0.2f'%(np.angle(a)/np.pi)))
         print(' b: %07s    (intensity)\n'%('%0.2f'%(np.abs(b)**2)),
                '   %07s*pi (phase)'%('%0.2f'%(np.angle(b)/np.pi)))
         response = oracle.ask(a, b)
-        print('oracle.ask(a, b):', response, '\n')
-    print("Budget exceeded; game over.")
-    print("\nFrom these responses, how well can you infer 'x'?")
+        print('oracle.ask(a, b):', response)
+        print('Total cost: %0.2f / %0.2f\n'%(oracle.total_cost,
+                                                  oracle.budget))
+    print("Game over.")
+    print("From these responses, how well can you infer 'x'?")
     print("\nIf you'd made smarter choices of 'a' and 'b' on each round,\n",
           "could you do a better job inferring 'x'?", sep='')

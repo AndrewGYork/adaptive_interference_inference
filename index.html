@@ -12,11 +12,11 @@ Based on this theme: https://github.com/broccolini/dinky , which mentioned that 
     <base target="_blank">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="citation_title" content="Question: does adaptive interference improve our ability to infer intensity and phase?">
+    <meta name="citation_title" content="What is the signal-to-noise ratio of phase-contrast imaging? Can it be infinite?">
     <meta name="citation_author" content="Andrew G. York">
-    <meta name="citation_publication_date" content="2017/01/05">
+    <meta name="citation_publication_date" content="2018/09/13">
     <meta name="citation_journal_title" content="Github.io">
-    <meta name="citation_pdf_url" content="https://andrewgyork.github.io/adaptive_interference_inference/Publication_template%20by%20AndrewGYork.pdf">
+    <meta name="citation_pdf_url" content="https://andrewgyork.github.io/adaptive_interference_inference/adaptive_interference_inference%20by%20AndrewGYork.pdf">
     <title>adaptive_interference_inference by AndrewGYork</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
@@ -42,9 +42,9 @@ Based on this theme: https://github.com/broccolini/dinky , which mentioned that 
         <ul>
           <li class="download"><a class="buttons" href="https://github.com/AndrewGYork/adaptive_interference_inference/zipball/master">Download ZIP</a></li>
           <li><a class="buttons github" href="https://github.com/AndrewGYork/adaptive_interference_inference">View On GitHub</a></li>
-          <li><a class="buttons pdf" href="./Publication_template%20by%20AndrewGYork.pdf">Download PDF</a></li>
+          <li><a class="buttons pdf" href="./adaptive_interference_inference%20by%20AndrewGYork.pdf">Download PDF</a></li>
         </ul>
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/AndrewGYork">AndrewGYork</a></p>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/AndrewGYork">AndrewGYork</a> in the <a class="header name" href="https://andrewgyork.github.io/">York lab</a>, and was funded by <a class="header name" href="https://www.calicolabs.com/">Calico Life Sciences LLC</a> </p>
       </header>
 <!-- 
 ##############################################################
@@ -53,12 +53,16 @@ The real text begins here.
  -->
 <section>
 <h1>Micro-publication</h1>
-<h2>What is the signal-to-noise ratio of phase-contrast imaging?</h2>
+<h2>What is the signal-to-noise ratio of phase-contrast imaging? Can it be infinite?</h2>
 <p class="author_list">Andrew G. York<sup>1*</sup></p>
 <p class="author_affiliations"><sup>1</sup>Calico Life Sciences LLC, South San Francisco, CA 94080, USA</p>
 <p class="contact_email"><sup>*</sup>Permanent email: <a href="mailto:andrew.g.york+inference@gmail.com" target="_self">andrew.g.york+inference@gmail.com</a></p>
 <p class="contact_email"><sup>*</sup>Institutional email: <a href="mailto:agy+inference@calicolabs.com" target="_self">agy+inference@calicolabs.com</a></p>
+<h3>Abstract</h3>
 <p class="abstract">A mathematical optimization problem, inspired by the physics of interferometry. How much can tuning the intensity and phase of an interfering reference beam improve our ability to infer the absorption and phase shift due to an unknown object?
+</p>
+<h3>Intended audience</h3>
+<p class="abstract">Anyone who likes math, coding, or physics. Click the appropriate link below to jump to the relevant section:
 </p>
 <table>
   <tr>
@@ -68,38 +72,41 @@ The real text begins here.
   </tr>
 </table>
 
-
-<p><a href="https://doi.org/FIXME">doi: 10.5281/zenodo.FIXME</a></p>
+<h3>Peer review status</h3>
+<p>Pre-print published XXX XX, 20XX (This article is not yet peer-reviewed)</p>
+<p>Cite as: <a href="https://doi.org/XXXX">doi:10.5281/zenodo.XXXX</a></p>
 
 <h3 class="onlyprint">
-Note that this is a limited PDF or print version; animated and interactive figures are disabled. For the full version of this article, please visit <a href="https://andrewgyork.github.io/publication_template">https://andrewgyork.github.io/publication_template</a></h3>
+Note that this is a limited PDF or print version; animated and interactive figures are disabled. For the full version of this article, please visit <a href="https://andrewgyork.github.io/adaptive_interference_inference">https://andrewgyork.github.io/adaptive_interference_inference</a></h3>
 
 <noscript>
 <h3>Your browser doesn't seem to support Javascript. This document uses Javascript for interactive figures, math typesetting, and to automatically generate the reference list. Either activate Javascript, or use the "Download PDF" link above if you want properly typeset math and a reference list.</h3></noscript>
 
 <h3 id="math_puzzle">
 A math puzzle</h3>
-<p>Let's play a game. I know a complex number \(x\). Your job is to infer \(x\). You know that \(|x| \leq 1\). <a href="./index.html#note_1" target="_self" title="For Bayesians: I'll choose the magnitude |x| from a uniform distribution between 0 and 1, and I'll choose the phase arg(x) from a uniform distribution between 0 and 2pi. Bonus points if your algorithm works robustly (or can be easily adapted) if 'x' is drawn from a different distribution.
+<p>Let's play a game. I know a complex number \(x\). Your job is to infer \(x\). You know that \(|x| \leq 1\). <a href="./index.html#note_1" target="_self" title="For Bayesians: I'll choose the magnitude |x| from a uniform distribution between 0 and 1, and I'll choose the phase &ang;x from a uniform distribution between 0 and 2&pi;. Bonus points if your algorithm works robustly (or can be easily adapted) if 'x' is drawn from a different distribution.
 ">*</a></p>
 
-<p>You may choose any two complex numbers, \(a\) and \(b\). I will calculate \(y = |(ax + b)|^2\). Then I'll draw randomly from a Poisson distribution with expectation value \(y\), and tell you the (stochastic) result \(R\).</p>
+<p>You may choose any two complex numbers, \(a\) and \(b\). I will calculate \(y = |ax + b|^2\). Then I'll draw randomly from a Poisson distribution with expectation value \(y\), and tell you the (stochastic) result \(r\).</p>
 
-<p>We repeat this process as many times as you'd like: on round \(i\), you choose \(a_i\) and \(b_i\), I'll calculate \(y_i\) and I'll tell you \(R_i\). Your "cost" for round \(i\) is the quantity \(|a_i|^2\), and you have a "budget" of \(A\). If you go over budget (meaning, if you choose a value \(a_N\) such that \(A \lt \sum_i^N |a_i|^2\)), I won't answer, and the game is over.</p>
+<p>We repeat this process as many times as you'd like: on round \(i\), you choose \(a_i\) and \(b_i\), I'll calculate \(y_i\) and I'll tell you \(r_i\). Your "cost" for round \(i\) is the quantity \(|a_i|^2\), and you have a "budget" of \(A\). If you go over budget (meaning, if you choose a value \(a_N\) such that \(A \lt \sum_i^N |a_i|^2\)), I won't answer, and the game is over.</p>
 
-<p>What algorithm should you follow to infer \(x\) as accurately<a href="./index.html#note_2" target="_self" title="Note I didn't define 'accuracy'! I'll leave this intentionally flexible. I suspect the 'ideal' algorithm will depend on the choice of definition, but I'm indifferent as long as your definition of accuracy seems sane to me.">**</a> as possible, for a given value of \(A\)? Ideally, express this algorithm as a short Python/Numpy script, ideally in a Github repo that I can link to here. Feel free to invite anyone who's interested to play.</p>
+<p>What algorithm should you follow to infer \(x\) as accurately<a href="./index.html#note_2" target="_self" title="Note I didn't define &ldquo;accuracy&rdquo;! I'll leave this intentionally flexible. I suspect the &ldquo;ideal&rdquo; algorithm will depend on the choice of definition, but I'm indifferent as long as your definition of accuracy seems sane to me.">**</a> as possible, for a given value of \(A\)? Ideally, express this algorithm as a short Python/Numpy script, ideally in a Github repo that I can link to here. Feel free to invite anyone who's interested to play.</p>
 
 <p>Let the best algorithm win!</p>
 
 <ul>
   <li>Can you do any better than the algorithm \(a_0 = A\), \(b_0 = 0\) ?</li>
-  <li>Can you do any better than an algorithm where \(a\) and \(b\) are chosen in advance, independently of \(R_k\)? For example: \(a_k = \sqrt{A/N}\) and \(b_k = \sqrt{A/N}e^{2\pi i k / N}\)</li>
+  <li>Can you do any better than an algorithm where \(a\) and \(b\) are chosen in advance, independently of \(r_k\)? For example: \(a_k = \sqrt{A/N}\) and \(b_k = \sqrt{A/N}e^{2\pi i k / N}\)</li>
 </ul>
 
 <h4>Notes:</h4>
-<p id="note_1"><a href="./index.html#note_1" target="_self">*</a> For Bayesians: I'll choose the magnitude \(|x|\) from a uniform distribution between \(0\) and \(1\), and I'll choose the phase \(\arg(x)\) from a uniform distribution between \(0\) and \(2\pi\). Bonus points if your algorithm works robustly (or can be easily adapted) if \(x\) is drawn from a different distribution.
+<p id="note_1">
+<a href="./index.html#note_1" target="_self">*</a> For Bayesians: I'll choose the magnitude \(|x|\) from a uniform distribution between \(0\) and \(1\), and I'll choose the phase \(\angle x\) from a uniform distribution between \(0\) and \(2\pi\). Bonus points if your algorithm works robustly (or can be easily adapted) if \(x\) is drawn from a different distribution.
 </p>
 
-<p id="note_2"><a href="./index.html#note_2" target="_self">**</a> Note I didn't define 'accuracy'! I'll leave this intentionally flexible. I suspect the "ideal" algorithm will depend on the choice of definition, but I'm indifferent as long as your definition of accuracy seems sane to me.</p>
+<p id="note_2">
+<a href="./index.html#note_2" target="_self">**</a> Note I didn't define "accuracy"! I'll leave this intentionally flexible. I suspect the "ideal" algorithm will depend on the choice of definition, but I'm indifferent as long as your definition of accuracy seems sane to me.</p>
 
 <h3 id="coding_challenge">
 A coding challenge</h3>
@@ -114,7 +121,7 @@ class Oracle:
         self.round = 0
         self.a_history = []
         self.b_history = []
-        self.R_history = []
+        self.r_history = []
         self.game_over = False
         
         # Generate some secret numbers.
@@ -132,170 +139,102 @@ class Oracle:
             self.game_over = True
             return None
         y = np.abs(a*self._x + b)**2
-        R = np.random.poisson(y)
+        r = np.random.poisson(y)
         self.round += 1
         self.a_history.append(a)
         self.b_history.append(b)
-        self.R_history.append(R)
-        return R
+        self.r_history.append(r)
+        return r
 </code></pre>
 <p></p>
-<p>To play this game, import <code>game.py</code>, create an instance of the <code>Oracle</code> object, and try to infer the value of <code>Oracle._magnitude</code> and/or <code>Oracle._phase</code> as accurately as you can, using only calls to the <code>Oracle.ask(a, b)</code> method. You are allowed to inspect the code of <code>game.py</code>, but after you instantiate an <code>Oracle</code> object, you are <em>not</em> allowed to inspect its <code>Oracle._x</code>, <code>Oracle._magnitude</code>, or <code>Oracle._phase</code> attributes; that's cheating!</p>
+<p>To play this game, import <code>game.py</code>, choose a value for <code>budget</code>, and create an instance of the <code>Oracle</code> object. Try to infer the value of <code>Oracle._magnitude</code> and/or <code>Oracle._phase</code> as accurately as you can, using only the return values of calls to the <code>Oracle.ask(a, b)</code> method. You are allowed to inspect the code of <code>game.py</code>, but after you instantiate an <code>Oracle</code> object, you are <em>not</em> allowed to inspect its <code>Oracle._x</code>, <code>Oracle._magnitude</code>, or <code>Oracle._phase</code> attributes; that's cheating!<a href="./index.html#note_3" target="_self" title="For machine-learners: feel free to inspect `Oracle._x', `Oracle._magnitude', and/or `Oracle._phase' while you're training and validating a model, just be careful that your *model* doesn't consult these values.">***</a></p>
 <p>Here's an example of how you might use this oracle to play the game:</p>
-<pre><code class="language-python">import game
+<pre><code class="language-python">import numpy as np
+import game
+
 print("An example game")
-    oracle = game.Oracle(budget=1000)
-    print("Budget:", oracle.budget, '\n')
-    while not oracle.game_over:
-        print('Round', oracle.round)
-        print('Total cost so far: %0.2f / %0.2f'%(oracle.total_cost, oracle.budget))
-        a = 40*np.random.random(1)*np.exp(1j*2*np.pi*np.random.random(1))
-        b = 40*np.random.random(1)*np.exp(1j*2*np.pi*np.random.random(1))
-        print(' a: %07s    (intensity)\n'%('%0.2f'%(np.abs(a)**2)),
-               '   %07s*pi (phase)'%('%0.2f'%(np.angle(a)/np.pi)))
-        print(' b: %07s    (intensity)\n'%('%0.2f'%(np.abs(b)**2)),
-               '   %07s*pi (phase)'%('%0.2f'%(np.angle(b)/np.pi)))
-        response = oracle.ask(a, b)
-        print('oracle.ask(a, b):', response, '\n')
-    print("Budget exceeded; game over.")
-    print("\nFrom these responses, how well can you infer 'x'?")
-    print("\nIf you'd made smarter choices of 'a' and 'b' on each round,\n",
-          "could you do a better job inferring 'x'?", sep='')</code></pre>
+oracle = game.Oracle(budget=1000)
+print("Budget:", oracle.budget, '\n')
+num_phases = 5
+for phase_angle in np.arange(0, 2*np.pi, 2*np.pi/num_phases):
+    print('Round', oracle.round)
+    a = np.sqrt(oracle.budget / num_phases) * (1 - 1e-12)
+    b = a * np.exp(1j*phase_angle)
+    print(' a: %07s    (intensity)\n'%('%0.2f'%(np.abs(a)**2)),
+           '   %07s*pi (phase)'%('%0.2f'%(np.angle(a)/np.pi)))
+    print(' b: %07s    (intensity)\n'%('%0.2f'%(np.abs(b)**2)),
+           '   %07s*pi (phase)'%('%0.2f'%(np.angle(b)/np.pi)))
+    response = oracle.ask(a, b)
+    print('oracle.ask(a, b):', response)
+    print('Total cost: %0.2f / %0.2f\n'%(oracle.total_cost,
+                                              oracle.budget))
+print("Game over.")
+print("From these responses, how well can you infer 'x'?")
+print("\nIf you'd made smarter choices of 'a' and 'b' on each round,\n",
+      "could you do a better job inferring 'x'?", sep='')</code></pre>
 
-<p>Note that this is just an example of how to ask the oracle questions. I didn't specify an inference method to infer <code>Oracle._x</code> based on the oracle's responses to <code>Oracle.ask(a, b)</code>. That's the game!</p>
+<p>Note that this is just an example of how to ask the oracle questions. I didn't specify a  method to infer <code>Oracle._x</code> based on the oracle's responses to <code>Oracle.ask(a, b)</code>. That's the game!</p>
 
-<p>What's the best algorithm you can implement to infer the value of <code>Oracle._x</code> as accurately<a href="./index.html#note_2" target="_self" title="Note I didn't define 'accuracy'! I'll leave this intentionally flexible. I suspect the 'ideal' algorithm will depend on the choice of definition, but I'm indifferent as long as your definition of accuracy seems sane to me.">**</a> as possible, for a given value of <code>Oracle.budget</code>? Ideally, express this algorithm as a short Python/Numpy script, ideally in a Github repo that I can link to here. Feel free to invite anyone who's interested to play.</p>
+<p>What's the best algorithm you can implement to infer the value of <code>Oracle._x</code> as accurately<a href="./index.html#note_2" target="_self" title="Note I didn't define &ldquo;accuracy&rdquo;! I'll leave this intentionally flexible. I suspect the &ldquo;ideal&rdquo; algorithm will depend on the choice of definition, but I'm indifferent as long as your definition of accuracy seems sane to me.">**</a> as possible, for a given value of <code>Oracle.budget</code>? Ideally, express this algorithm as a short Python/Numpy script, ideally in a Github repo that I can link to here. Feel free to invite anyone who's interested to play.</p>
+
+<h4>Notes:</h4>
+<p id="note_3">
+<a href="./index.html#note_3" target="_self" >***</a> For machine-learners: feel free to inspect <code>Oracle._x</code>, <code>Oracle._magnitude</code>, and/or <code>Oracle._phase</code> while you're training and validating a model, just be careful that your <em>model</em> doesn't consult these values.
+</p>
 
 <h3 id="physics_question">
 A physics question</h3>
-What is the signal-to-noise ratio of phase contrast imaging?
+<p>Suppose we want to measure the complex optical transmission coefficient \(x\) of a thin uniform flat-faced slab of partially transparent unknown material<a href="./index.html#note_4" target="_self" title="This is an extremely common, extremely general problem. For example, this is the one-voxel limit of nearly the entire field of transmitted light microscopy."><sup>&dagger;</sup></a>. When we transmit a collimated beam of monochromatic light through the slab, the slab reduces the beam's amplitude by \(|x|\), and shifts the beam's phase by \(\angle x\). How accurately can we measure this change in intensity and phase?</p>
+
+<p>Consider the ideal interferometric measurement shown in Figure 1 below:</p>
 
 <figure id="Figure_1">
-<img src="./images/interferometer/interferometer_1.svg"
+<img src="./images/interferometer/interferometer.svg"
  alt="Figure 1" id="Figure_1_image">
 <table class="figure_controls">
   <tr>
-  <td>Measurement type: </td><td><form id="Figure_1_measurement" onchange="update_figure_1()">
-    <input type="radio" name="measurement" id="interferometer_1.svg" checked="checked">Intensity measurement<br>
-    <input type="radio" name="measurement" id="interferometer_2.svg">Interferometric measurement<br>
-    <input type="radio" name="measurement" id="interferometer_3.svg">Background intensity measurement<br>
-    <input type="radio" name="measurement" id="interferometer_4.svg">Object-free interferometric measurement<br>
+  <td style="text-align: center"><br>Measurement type:<br><br><br> <em>(Click the radio buttons to change the figure)</em> </td><td><form id="Figure_1_measurement" onchange="update_figure_1()">
+    <input type="radio" name="measurement" id="interferometer.svg" checked="checked">Interferometric measurement<br>
+    <input type="radio" name="measurement" id="interferometer_x_is_one.svg">Object-free interferometric measurement \((x = 1)\)<br>
+    <input type="radio" name="measurement" id="interferometer_a_is_zero.svg">Background intensity measurement \((a = 0)\)<br>
+    <input type="radio" name="measurement" id="interferometer_b_is_zero.svg">Transmitted intensity measurement \((b = 0)\)<br>
   </form></td></tr>
 </table>
-<figcaption><strong>Figure 2: An interactive figure using local images.</strong> This figure's images were pre-generated by <code>/figure_generation/figure_2.py</code>, and switched dynamically by <code>/javascript/update_figures.js</code>. </figcaption>
+<figcaption><strong>Figure 1: An unknown material sits in one arm of an ideal optical interferometer</strong>. The interfering beams are collimated, monochromatic, perfectly coherent, and overlap perfectly at the outputs. The average number of photoelectrons \(y\) measured per trial at Detector 1 is \(|ax + b|^2\), where \(a\), \(b\), and \(x\) are complex numbers. Modulators \(a\) and \(b\) let us tune the amplitude and phase of \(a\) and \(b\) respectively. The absorption and phase shift due to the material determines the amplitude and phase of \(x\). </figcaption>
 </figure><p></p>
 
-<!--
-<h3>
-Introduction</h3>
-<p>
-Version control tools like <a href="https://git-scm.com/">Git</a>, <a href="https://github.com/">Github</a>, and <a href="https://pages.github.com/">Github Pages</a> are great for developing, sharing, and documenting code. Why not for science, too? Consider the following workflow:
-</p>
+<p>We make a measurement by choosing the amplitude and phase for each modulator and counting photoelectron "clicks" at Detector 1 for some time interval. Suppose that our source and our interferometer are perfectly stable, and our detector never gives false detections<a href="./index.html#note_5" target="_self" title="This is consistent with the laws of physics, but an awful lot of work to achieve in practice."><sup>&dagger;&dagger;</sup></a>. Even in this ideal case, the number of "clicks" we count is inherently stochastic. The number of clicks per trial at Detector 1 is drawn from a Poisson distribution with expected value \(y=|ax + b|^2\). How shall we infer \(x\)?</p>
+
+<p>With the probe beam blocked (Fig. 1 with <code>Measurement type: Background intensity measurement</code>), we can calibrate the reference beam signal \(|b|^2\) due to Modulator \(b\). Since the mean \(y\) of a Poisson process grows faster than its standard deviation \(\sqrt{y}\), we can calibrate the output amplitude of Modulator \(b\) with arbitrarily high signal-to-noise ratio \(y / \sqrt{y}\), by chasing the limit \(|b|^2 \rightarrow \infty\). Next, we can remove the object (Fig. 1 with <code>Measurement type: Object-free interferometric measurement</code>) and use a similar procedure to calibrate the output amplitude of Modulator \(a\), and also to calibrate how the modulators tune the relative phase \(\angle(a/b)\) between the probe and reference beams.</p>
+
+<p>With perfect knowledge and control of \(a\) and \(b\), we're ready to measure the complex transmission \(x\) of our object. Let's add one additional constraint: for this measurement, we can't use an infinite amount of light. Perhaps we're time-limited; our source has finite brightness, we have many objects to measure today, and we can't spend as much time on one measurement as we did on calibration. Perhaps we're dose-limited; too much light might melt or burn our unknown object. Either way, if the cumulative "light dose" \(\sum_i^N|a_i|^2\) at trial \(N\) exceeds our "dose budget" \(A\), we must stop measuring, and Poisson noise limits our signal-to-noise ratio. What is our signal, and what is our noise?</p>
+
+<p>Let's start with a simple measurement of \(|x|\) (how much the object reduces the probe beam's amplitude; Fig. 1 with <code>Measurement type: Transmitted intensity measurement</code>). Each trial, Detector 1 yields a number of "clicks" drawn stochastically from a Poisson distribution with expectation value \(|ax|^2\). Our noise is the standard deviation of this distribution, \(|ax|\). Given our perfect knowledge of \(a\), our mean signal is the <em>change</em> in intensity \(|a|^2 - |ax|^2\), yielding a signal-to-noise ratio (SNR) of \(|\frac{a}{x}| - |ax|\). Note that in the \(|x| \rightarrow 1\) limit of perfect transmission, the SNR tends to zero. Similarly, in the \(x \rightarrow 0\) limit of perfect opacity, the SNR tends to infinity! This makes sense: an object with sufficiently high transmission becomes invisible to a transmission measurement, and a perfectly opaque object yields a detectable and fluctuation-free signal. Perhaps most interestingly, if you count even a single "click", you know \(|x| \neq 0\) and the object was not perfectly opaque.</p>
+
+<p>If we want to measure phase \(\angle{x}\) in addition to amplitude \(|x|\), we must use interference (Fig. 1 with <code>Measurement type: Interferometric measurement</code>). Our noise in this case is \(|ax + b|\), and our signal is still the change in intensity due to the object, \(|a + b|^2 - |ax + b|^2\), yielding an SNR of \(\frac{|a + b|^2}{|ax + b|} - |ax + b|\). Like transmission measurements, our SNR can be infinite, but since we control \(a\) and \(b\), we can achieve infinite SNR regardless of the value of \(x\)! All we have to do is choose \(\frac{b}{a} = x\), and we're guaranteed to get a detectable, fluctuation-free signal with infinite SNR: zero "clicks". This is presumably insane, but it raises some fun questions.</p>
+
+<p>In order to achieve "infinite SNR", we must have chosen \(\frac{b}{a} = x\). But if we don't know \(x\) yet, how are we supposed to choose \(a\) and \(b\)? Also, observing zero clicks doesn't guarantee \(x = \frac{b}{a}\); maybe we just didn't wait long enough. Infinite SNR is therefore quite different from infinite precision. However, if we observe even a single click on Detector 1, we know with certainty \(x \neq \frac{b}{a}\). This suggests that if we view measurement as asking a question to the unknown object, the question "What are you?" may be very different from the question "Are you <em>this</em>?". There are only two possibly answers: "maybe" (zero clicks after using up your entire dose budget) and "no" (the first click, at which point you should probably halt the measurement and re-tune your modulators). Clearly there are important clues encoded in how quickly the "no" is delivered.</p>
+
+<p>So, what algorithm should we use for tuning our modulators? My suspicion is the optimal measurement will use an extremely small fixed value for \(a\) (virtually guaranteeing zero or one "clicks" per trial), and choose a new \(|b|\) and \(\angle{b}\) after every time the detector clicks, hunting for the informative special case \(b = ax\). I also suspect that the new choice of \(b\) should be informed by how long each previous measurement took to produce its first click.</p>
+
+<p>But I'm not going to solve this myself; I'd rather play the game with you. What algorithm would you use? Ideally, express this algorithm as a short Python/Numpy script, ideally in a Github repo that I can link to here. Feel free to invite anyone who's interested to play.</p>
+
+<p>What does this teach us about measurement?</p>
+
 <ul>
-<li><strong>Discover or invent something.</strong> This is supposed to be the hard part. For me, this invariably involves writing wild and wooly exploratory Python code, which goes in a private Github repository, if I'm behaving myself.</li>
-<li><strong>Collect results into intelligible figures.</strong> I usually do this via Python code, which also belongs in a private Github repository.</li>
-<li><strong>Write explanatory text.</strong> I've always found this step is a mess. No set of tools I've tried (e.g. Word, LaTeX, Google Docs) fit my workflow (e.g. collaboration, version control, formatting). An HTML/CSS template with math typesetting, code syntax highlighting, and automatic reference listing (via Javascript) fits me perfectly - and allows collaborative writing via a private Github repo!</li>
-<li><strong>Circulate preprints.</strong> Existing options like email, ArXiv, or BioArXiv are great, but it's 2016 - why are we using PDFs? The web makes sharing data, code, animations, and interactive figures straightforward. If the code, data, and HTML are already on Github, then sharing a preprint is as simple as <a href="https://pages.github.com/">activing Github Pages</a>.</li>
-<li><strong>Submit for peer review.</strong> Historically, a huge mess. Much has been written about the <a href="http://www.ascb.org/2016/11/07/on-publishing-and-the-sneetches-a-wake-up-call-november-december-2016-newsletter/">unfortunate state of academic publishing</a>. Why not cut out the middleman and solicit review directly from qualified colleagues? (A much longer discussion, and beyond the scope of this document - but I want to try it.)</li>
-<li><strong>Archive for posterity.</strong> I want my work to exist after I die, in an open, available and <a href="https://guides.github.com/activities/citable-code/">citable</a> form. Github, Github Pages, and <a href="https://zenodo.org/">Zenodo</a> address these problems cleanly (although there's room for improvement).</li>
+  <li>Is "infinite SNR" actually indicative of high precision?</li>
+  <li>Do we actually benefit from "hunting" for perfect destructive interference at Detector 1, or would we be better off searching for a diverse set of \(a\), \(b\) combinations?</li>
+  <li>How much better could you do if you also had access to "clicks" from Detector 2?</li>
 </ul>
 
-<p>I've been careful about dependencies; Git and Github are helpful, but not required. You can download a <a href="https://github.com/AndrewGYork/publication_template/zipball/master"><code>.zip</code> of this repository</a>, edit <code>index.html</code> with a text editor, and view the results with a web browser. I avoid Javascript which loads via the web, so you can work offline. My figure generation code depends on the <a href="https://www.scipy.org/stackspec.html">Scipy stack</a>, but this is easy to swap out; all you have to do is generate static images, put them in the proper folder, and link to them from <code>index.html</code>. You can generate your static images using any tool you choose. If you happen to use code to generate your figures, though, great! You can put this code in the <code>figure_generation</code> directory, enabling version control and simple reproduction of your results by others.</p>
+<h4>Notes:</h4>
+<p id="note_4">
+<a href="./index.html#note_4" target="_self"><sup>&dagger;</sup></a>This is an extremely common, extremely general problem. For example, this is the one-voxel limit of nearly the entire field of transmitted light microscopy.</p>
 
-<p>Writing directly in HTML/CSS/Javascript isn't for everyone. It's fiddly, has a learning curve, and requires obsessive attention to detail. In my experience, writing a scientific publication already fits this description, so it's a small price to pay, and one I'm already paying.</p>
+<p id="note_5">
+<a href="./index.html#note_5" target="_self"><sup>&dagger;&dagger;</sup></a> This is consistent with the laws of physics, but an awful lot of work to achieve in practice.
+</p>
 
-<h3>
-Math typesetting</h3>
-
-<p>I use MathJax for typesetting. I want to be able to work offline, but a local MathJax copy is huge, so I followed the recipe described by <a href="https://tiborsimon.io/articles/web/minimal-mathjax/">Tibor Simon</a> to make a minimal version. The recipe's pretty cool; you delete most of MathJax, try to load it, watch your browser console, and copy files back one at a time until your browser stops complaining. I only support LaTex input; if you want more, you can follow Tibor's recipe and replace the contents of <code>/javascript/Minimal-MathJax/</code>.</p>
-
-<p>Examples of paragraph equations:</p>
-<div>
-    $$\begin{equation}\prod_{\substack{1\le i \le n\\ 1\le j \le m}}M_{i,j} \end{equation}$$
-    $$\begin{equation}L' = {L}{\sqrt{1-\frac{v^2}{c^2}}}\end{equation} $$
-    $$\begin{align} B'&=-\nabla \times E,\\E'&=\nabla \times B - 4\pi j,\end{align} $$
-    $$\begin{equation}x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + a_4}}}\end{equation} $$
-</div>
-
-Example of inline math: \(\frac{a^3}{b}\)
-
-<h3>
-Code syntax highlighting</h3>
-
-<p><a href="http://prismjs.com/">Prism.js</a> makes HTML syntax highlighting easy. I only included Python highlighting; if you want more, download a freshly customized version from <a href="http://prismjs.com/">prismjs.com</a> and replace <code>/javascript/python-highlighting/prims.js</code>.</p>
-
-<p>Example python syntax highlighting:</p>
-<pre><code class="language-python">import antigravity
-antigravity.fly()
-print("Whee!")
-</code></pre>
-
-<h3>
-Automatic reference list</h3>
-
-<p>An example of how to include a citation:
-
-[<a class="citation" href="http://dx.doi.org/10.1371/journal.pgen.1004526" title="Asymmetric Division and Differential Gene Expression during a Bacterial Developmental Program Requires DivIVA; Prahathees Eswaramoorthy, Peter W. Winter, Peter Wawrzusin, Andrew G. York, Hari Shroff, Kumaran S. Ramamurthi; PLoS Genet 10 (8), e1004526">Eswaramoorthy2014</a>].
-
-If you inspect the HTML, you'll see that inserting the citation is super clumsy, but at least you don't have to keep track of uniqueness, ordering, etc.</p>
-
-<h3>
-Static and interactive figures</h3>
-
-<p>Version control isn't a great way to organize images, but you can get away with it if there aren't too many, and they don't change too often. Figure 1 uses an image stored in the local repository.</p>
-
-<figure id="Figure_1">
-<img src="./images/figure_1/period_000002.svg"
- alt="Figure 1" id="Figure_1_image">
-<figcaption><strong>Figure 1: A static figure using a local image.</strong> This image was generated by <code>/figure_generation/figure_1.py</code>.  </figcaption>
-</figure><p></p>
-
-<p> Figure 2 is interactive; the images are pre-computed (by Python code, in this case) and stored in the local repository. Simple javascript changes the figure's <code>img.src</code> when the figure's <code>select</code> changes. The images are small and don't change much, so it's not horrible to store them in this repository. A similar figure with substantially more images would stretch the limits of this approach. </p>
-
-<figure id="Figure_2">
-<img src="./images/figure_2/period_000004.svg"
- alt="Figure 2" id="Figure_2_image">
-<table class="figure_controls">
-  <tr>
-  <td>Period: </td><td><select id="Figure_2_period" onchange="update_figure_2()">
-    <option value="000001">1</option>
-    <option value="000002">2</option>
-    <option value="000003">3</option>
-    <option value="000004" selected="selected">4</option>
-    <option value="000005">5</option>
-    <option value="000006">6</option>
-    <option value="000007">7</option>
-    <option value="000008">8</option>
-    <option value="000009">9</option>
-  </select></td><td>(change this to adjust the period of the sinusoidal plot)</td>
-    </tr>
-</table>
-<figcaption><strong>Figure 2: An interactive figure using local images.</strong> This figure's images were pre-generated by <code>/figure_generation/figure_2.py</code>, and switched dynamically by <code>/javascript/update_figures.js</code>. </figcaption>
-</figure><p></p>
-
-<p>Interactive figures can potentially contain huge numbers of images, which are clumsy to store in a version-controlled repository. My current preferred solution is to store such images in an auxiliary location. During the writing process, we generate these images automatically using the figure generation code and store them locally. Once the paper is ready to publish, we host a copy of these images in a second auxiliary repository. The figure update Javascript finds the appropriate image source for us.</p>
-
-<figure id="Figure_3">
-<img src="./images/figure_3/period_000004.svg"
- alt="Figure 3" id="Figure_3_image">
-<table class="figure_controls">
-  <tr>
-  <td>Period: </td><td><select id="Figure_3_period" onchange="update_figure_3()">
-    <option value="000001">1</option>
-    <option value="000002">2</option>
-    <option value="000003">3</option>
-    <option value="000004" selected="selected">4</option>
-    <option value="000005">5</option>
-    <option value="000006">6</option>
-    <option value="000007">7</option>
-    <option value="000008">8</option>
-    <option value="000009">9</option>
-  </select></td><td>(change this to adjust the period of the sinusoidal plot)</td>
-  </tr>
-</table>
-<figcaption><strong>Figure 3: An interactive figure using images that aren't stored in this repository.</strong> This figure's images were pre-generated by <code>/figure_generation/figure_3.py</code>, and switched dynamically by <code>/javascript/update_figures.js</code>. </figcaption>
-</figure><p></p>
--->
 <noscript>
 <h3>Your browser doesn't seem to support Javascript. This document uses Javascript to generate a reference list, which would normally be displayed here. Either activate Javascript, or use the "Download PDF" link above if you want to see the reference list.</h3></noscript>
 
