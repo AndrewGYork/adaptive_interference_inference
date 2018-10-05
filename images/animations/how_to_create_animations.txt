@@ -1,0 +1,16 @@
+install ffmpeg (www.ffmpeg.org/)
+
+install python 3 (www.python.org)
+
+open one of the subfolders in this directory
+
+open animation.odp in LibreOffice
+
+export as html (this will dump a bunch of .png files in that folder)
+
+run the python 3 script 'generate_animation.py'
+
+OR
+
+run this command at the prompt:
+ffmpeg -y -r 10 -f image2 -i img%d.png -movflags faststart -pix_fmt yuv420p -vcodec libx264 -vf crop=2*trunc(iw/2):2*trunc(0.54*ih/2):0:ih*(1-0.54)/2 -preset veryslow -crf 25 animation.mp4

@@ -54,15 +54,15 @@ The real text begins here.
 <section>
 <h1>Micro-publication</h1>
 <h2>What is the signal-to-noise ratio of phase-contrast imaging? Can it be infinite?</h2>
-<p class="author_list">Andrew G. York<sup>1*</sup></p>
+<p class="author_list">Andrew G. York<sup>1*</sup>, Sanjay R. Varma<sup>1</sup></p>
 <p class="author_affiliations"><sup>1</sup>Calico Life Sciences LLC, South San Francisco, CA 94080, USA</p>
 <p class="contact_email"><sup>*</sup>Permanent email: <a href="mailto:andrew.g.york+inference@gmail.com" target="_self">andrew.g.york+inference@gmail.com</a></p>
 <p class="contact_email"><sup>*</sup>Institutional email: <a href="mailto:agy+inference@calicolabs.com" target="_self">agy+inference@calicolabs.com</a></p>
 <h3>Abstract</h3>
-<p class="abstract">A mathematical optimization problem, inspired by the physics of interferometry. How much can tuning the intensity and phase of an interfering reference beam improve our ability to infer the absorption and phase shift due to an unknown object?
+<p class="abstract">I'd like to invite you to consider one of my favorite physics questions, about how much information we can squeeze out of optical measurements. Even if you don't know any physics, the question translates cleanly to a pure mathematical puzzle, or alternatively, a coding challenge that might be well suited to machine-learning approaches. This is an old question, but an important one: optical measurements are an essential tool in every field of science and industry, and any improvement to our ability to extract information from light would have wide-ranging impact.
 </p>
 <h3>Intended audience</h3>
-<p class="abstract">Anyone who likes math, coding, or physics. Click the appropriate link below to jump to the relevant section:
+<p class="abstract">Anyone who likes math puzzles, coding challenges, and/or physics questions. Click the appropriate link below to jump to the relevant section:
 </p>
 <table>
   <tr>
@@ -203,26 +203,26 @@ A physics question</h3>
 <figcaption><strong>Figure 1: An unknown material sits in one arm of an ideal optical interferometer</strong>. The interfering beams are collimated, monochromatic, perfectly coherent, and overlap perfectly at the outputs. The average number of photoelectrons \(y\) measured per trial at Detector 1 is \(|ax + b|^2\), where \(a\), \(b\), and \(x\) are complex numbers. Modulators \(a\) and \(b\) let us tune the amplitude and phase of \(a\) and \(b\) respectively. The absorption and phase shift due to the material determines the amplitude and phase of \(x\). </figcaption>
 </figure><p></p>
 
-<p>We make a measurement by choosing the amplitude and phase for each modulator and counting photoelectron "clicks" at Detector 1 for some time interval. Suppose that our source and our interferometer are perfectly stable, and our detector never gives false detections<a href="./index.html#note_5" target="_self" title="This is consistent with the laws of physics, but an awful lot of work to achieve in practice."><sup>&dagger;&dagger;</sup></a>. Even in this ideal case, the number of "clicks" we count is inherently stochastic. The number of clicks per trial at Detector 1 is drawn from a Poisson distribution with expected value \(y=|ax + b|^2\). How shall we infer \(x\)?</p>
+<p>We make a measurement by choosing the amplitude and phase for each modulator and counting photoelectron "clicks" at Detector 1 for some time interval. Suppose that our source and our interferometer are perfectly stable, and our detector never gives false detections<a href="./index.html#note_5" target="_self" title="This is consistent with the laws of physics, but an awful lot of work to achieve in practice."><sup>&dagger;&dagger;</sup></a>. Even in this ideal case, the number of "clicks" we count is inherently stochastic. The number of clicks per trial at Detector 1 is drawn from a Poisson distribution<a href="./index.html#note_6" target="_self" title="For a discussion of this assertion, and many fascinating related issues, read the beautifully written second chapter of *The Quantum Challenge: Modern Research on the Foundations of Quantum Mechanics* by Greenstein and Zajonc."><sup>&dagger;&dagger;&dagger;</sup></a> with expected value \(y=|ax + b|^2\). How shall we infer \(x\)?</p>
 
-<p>With the probe beam blocked (Fig. 1 with <code>Measurement type: Background intensity measurement</code>), we can calibrate the reference beam signal \(|b|^2\) due to Modulator \(b\). Since the mean \(y\) of a Poisson process grows faster than its standard deviation \(\sqrt{y}\), we can calibrate the output amplitude of Modulator \(b\) with arbitrarily high signal-to-noise ratio \(y / \sqrt{y}\), by chasing the limit \(|b|^2 \rightarrow \infty\). Next, we can remove the object (Fig. 1 with <code>Measurement type: Object-free interferometric measurement</code>) and use a similar procedure to calibrate the output amplitude of Modulator \(a\), and also to calibrate how the modulators tune the relative phase \(\angle(a/b)\) between the probe and reference beams.</p>
+<p>With the probe beam blocked (Fig. 1 with <code>Measurement type: Background intensity measurement</code>), we can calibrate the reference beam signal \(|b|^2\) due to Modulator \(b\). Since the mean \(y\) of a Poisson process grows faster than its standard deviation \(\sqrt{y}\), we can calibrate the output amplitude of Modulator \(b\) with arbitrarily high signal-to-noise ratio \(y / \sqrt{y}\), by chasing the limit \(|b|^2 \rightarrow \infty\). Next, we can remove the object (Fig. 1 with <code>Measurement type: Object-free interferometric measurement</code>) and use a similar procedure to calibrate the output amplitude of Modulator \(a\), and also to calibrate how the modulators tune the relative phase \(\angle\frac{a}{b}\) between the probe and reference beams.</p>
 
 <p>With perfect knowledge and control of \(a\) and \(b\), we're ready to measure the complex transmission \(x\) of our object. Let's add one additional constraint: for this measurement, we can't use an infinite amount of light. Perhaps we're time-limited; our source has finite brightness, we have many objects to measure today, and we can't spend as much time on one measurement as we did on calibration. Perhaps we're dose-limited; too much light might melt or burn our unknown object. Either way, if the cumulative "light dose" \(\sum_i^N|a_i|^2\) at trial \(N\) exceeds our "dose budget" \(A\), we must stop measuring, and Poisson noise limits our signal-to-noise ratio. What is our signal, and what is our noise?</p>
 
-<p>Let's start with a simple measurement of \(|x|\) (how much the object reduces the probe beam's amplitude; Fig. 1 with <code>Measurement type: Transmitted intensity measurement</code>). Each trial, Detector 1 yields a number of "clicks" drawn stochastically from a Poisson distribution with expectation value \(|ax|^2\). Our noise is the standard deviation of this distribution, \(|ax|\). Given our perfect knowledge of \(a\), our mean signal is the <em>change</em> in intensity \(|a|^2 - |ax|^2\), yielding a signal-to-noise ratio (SNR) of \(|\frac{a}{x}| - |ax|\). Note that in the \(|x| \rightarrow 1\) limit of perfect transmission, the SNR tends to zero. Similarly, in the \(x \rightarrow 0\) limit of perfect opacity, the SNR tends to infinity! This makes sense: an object with sufficiently high transmission becomes invisible to a transmission measurement, and a perfectly opaque object yields a detectable and fluctuation-free signal. Perhaps most interestingly, if you count even a single "click", you know \(|x| \neq 0\) and the object was not perfectly opaque.</p>
+<p>Let's start with a simple measurement of \(|x|\) (how much the object reduces the probe beam's amplitude; Fig. 1 with <code>Measurement type: Transmitted intensity measurement</code>). Each trial, Detector 1 yields a number of "clicks" drawn stochastically from a Poisson distribution with expectation value \(|ax|^2\). Our noise is the standard deviation of this distribution, \(|ax|\). Given our perfect knowledge of \(a\), our mean signal is the <em>change</em> in intensity \(|a|^2 - |ax|^2\), yielding a signal-to-noise ratio (SNR) of \(|\frac{a}{x}| - |ax|\) for a single trial. Note that in the \(|x| \rightarrow 1\) limit of perfect transmission, the SNR tends to zero. Similarly, in the \(x \rightarrow 0\) limit of perfect opacity, the SNR tends to infinity! This actually makes sense: an object with sufficiently high transmission becomes invisible to a transmission measurement, and a perfectly opaque object yields a detectable and fluctuation-free signal. Perhaps most interestingly, if you count even a single "click", you know with complete confidence \(|x| \neq 0\) and the object was not perfectly opaque.</p>
 
 <p>If we want to measure phase \(\angle{x}\) in addition to amplitude \(|x|\), we must use interference (Fig. 1 with <code>Measurement type: Interferometric measurement</code>). Our noise in this case is \(|ax + b|\), and our signal is still the change in intensity due to the object, \(|a + b|^2 - |ax + b|^2\), yielding an SNR of \(\frac{|a + b|^2}{|ax + b|} - |ax + b|\). Like transmission measurements, our SNR can be infinite, but since we control \(a\) and \(b\), we can achieve infinite SNR regardless of the value of \(x\)! All we have to do is choose \(\frac{b}{a} = -x\), and we're guaranteed to get a detectable, fluctuation-free signal with infinite SNR: zero "clicks". This is presumably insane, but it raises some fun questions.</p>
 
-<p>In order to achieve "infinite SNR", we must have chosen \(\frac{b}{a} = -x\). But if we don't know \(x\) yet, how are we supposed to choose \(a\) and \(b\)? Also, observing zero clicks doesn't guarantee \(x = \frac{-b}{a}\); maybe we just didn't wait long enough for a click. Infinite SNR is therefore quite different from infinite precision. However, if we observe even a single click on Detector 1, we know with certainty \(x \neq \frac{-b}{a}\). This suggests that if we view measurement as asking a question to the unknown object, the question "What are you?" may be very different from the question "Are you <em>this</em>?". There are only two possible answers: "maybe" (zero clicks after using up your entire dose budget) and "no" (the first click, at which point you should probably halt the measurement and re-tune your modulators). Clearly there are important clues encoded in how quickly the "no" is delivered.</p>
+<p>In order to achieve "infinite SNR", we must have chosen \(\frac{b}{a} = -x\). But if we don't know \(x\) yet, how are we supposed to choose \(a\) and \(b\)? Also, observing zero clicks doesn't guarantee \(x = \frac{-b}{a}\); maybe we just didn't wait long enough for a click. Infinite SNR is therefore quite different from infinite precision. However, if we observe even a single click on Detector 1, we know with certainty \(x \neq \frac{-b}{a}\). This suggests that if we view measurement as asking a question to the unknown object, the question "What are you?" may be very different from the question "Are you <em>this</em>?". This second question has only two possible answers: "maybe" (zero clicks after using up your entire dose budget) and "no" (the first click, at which point you should probably halt the measurement and re-tune your modulators). Clearly there are important clues encoded in how quickly the "no" is delivered.</p>
 
-<p>So, what algorithm should we use for tuning our modulators? My suspicion is the optimal measurement will use an extremely small fixed value for \(a\) (virtually guaranteeing zero or one "clicks" per trial), and choose a new \(|b|\) and \(\angle{b}\) after every time the detector clicks, hunting for the informative special case \(b = -ax\). I also suspect that the new choice of \(b\) should be informed by how long each previous measurement took to produce its first click.</p>
+<p>So, what algorithm should we use for tuning our modulators and drawing conclusions about \(x\)? My suspicion is the optimal measurement will use an extremely small fixed value for \(a\) (virtually guaranteeing zero or one "clicks" per trial), and choose a new \(|b|\) and \(\angle{b}\) after every time the detector clicks, hunting for the informative special case \(b = -ax\). I also suspect that the new choice of \(b\) should be informed by how long each previous measurement took to produce its first click.</p>
 
 <p>But I'm not going to solve this myself; I'd rather play the game with you. What algorithm would you use? Ideally, express this algorithm as a short Python/Numpy script, ideally in a GitHub repository that I can link to here. Feel free to invite anyone who's interested to play.</p>
 
 <p>What does this teach us about measurement?</p>
 
 <ul>
-  <li>Is "infinite SNR" actually indicative of high precision?</li>
+  <li>Does "infinite SNR" in a single trial actually indicate a high-precision measurement?</li>
   <li>Do we actually benefit from "hunting" for perfect destructive interference at Detector 1, or would we be better off searching a diverse set of \(a\), \(b\) combinations?</li>
   <li>How much better could you do if you also had access to "clicks" from Detector 2?</li>
 </ul>
@@ -233,6 +233,68 @@ A physics question</h3>
 
 <p id="note_5">
 <a href="./index.html#note_5" target="_self"><sup>&dagger;&dagger;</sup></a> This is consistent with the laws of physics, but an awful lot of work to achieve in practice.
+</p>
+
+<p id="note_6">
+<a href="./index.html#note_6" target="_self"><sup>&dagger;&dagger;&dagger;</sup></a> For a discussion of this assertion, and many fascinating related issues, read the beautifully written second chapter of <a href="https://books.google.com/books?id=5t0tm0FB1CsC&lpg=PP1&dq=the%20quantum%20challenge&pg=PA24#v=onepage&q&f=false"><em>The Quantum Challenge: Modern Research on the Foundations of Quantum Mechanics</em></a> by Greenstein and Zajonc.
+</p>
+
+<h3 id="origin_story">What does this have to do with phase contrast microscopy?</h3>
+
+<p>In 1902, Siedentopf and Zsigmondy described the "ultramicroscope"
+
+[<a class="citation" href="https://doi.org/10.1002/andp.19023150102" title="Uber Sichtbarmachung und Größenbestimmung ultramikoskopischer Teilchen, mit besonderer Anwendung auf Goldrubingläser; H. Siedentopf and R. Zsigmondy; Ann. Phys., 315: 1-39 (1902)">Siedentopf 1902</a>],
+
+an early form of "dark-field" microscopy. By 1920, dark-field microscopy was a mature, well-established technique
+
+[<a class="citation" href="https://doi.org/10.2307/3221838" title="Modern dark-field microscopy and the history of its development; S.H. Gage; ">Gage 1920</a>], and Zsigmondy was awarded the 1925 Chemistry Nobel <q>for his demonstration of the heterogenous nature of colloid solutions <a href="https://www.nobelprize.org/prizes/chemistry/1925/summary/">and for the methods he used, which have since become fundamental...</a></q>.
+</p>
+
+<figure id="Figure_2">
+<video autoplay loop muted style="width:80%;" id="Figure_2_vid"
+ poster="images/animations/dark_field/poster.png">
+ <source src="images/animations/dark_field/animation.mp4" type="video/mp4">
+ Your browser doesn't support HTML5 MP4 video.`
+</video>
+<figcaption><strong>Figure 2: Animation illustrating the key concepts of dark-field microscopy.</strong> A red light pulse illuminates a point-like particle (small circle, left). The particle scatters some of this illumination light (expanding red circle). A lens (black oval, left) focuses the illumination pulse onto a beam block (small rectangle, center), which is opaque and absorbs the illumination.  Any scattered light that passes through the first lens and is not absorbed by the beam block will pass through a second lens (black oval, right) toward a multi-pixel detector (camera icon, far right), forming an image of the scattering particle on a dark background.</figcaption>
+</figure>
+<p></p>
+
+<p>Figure 2 above illustrates the essential concept of dark-field microscopy: only the portion of the illumination beam which is scattered by the sample can reach the detector. Scattering objects in the sample appear as if they are emitting light, and this light is imaged onto the detector on a dark background.</p>
+
+<p>Decades later, Frits Zernike demonstrated "phase contrast" microscopy, 
+
+ [<a class="citation" href="https://doi.org/10.1038/ncb1942" title="Das Phasenkontrastverfahren bei der mikroskopischen Beobachtung; F. Zernike; Z. technische Physik vol 16, p454–457 (1935)">Zernike 1935</a>,
+<a class="citation" href="https://doi.org/10.1016/S0031-8914(42)80035-X" title="Phase contrast, a new method for the microscopic observation of transparent objects; F. Zernike; Physica, Vol 9, p686-698 (1942)">Zernike 1942</a>].
+
+Zernike was awarded the 1953 Nobel prize in Physics <q>for his demonstration of the phase contrast method, especially for his <a href="https://www.nobelprize.org/prizes/physics/1953/summary/">invention of the phase contrast microscope</a>.</q>
+
+[<a class="citation" href="https://doi.org/10.1126/science.121.3141.345" title="How I discovered phase contrast; F. Zernike; Science 121.3141 (1955): 345-349.">Zernike 1955</a>].</p>
+
+<figure id="Figure_3">
+<video autoplay loop muted style="width:80%;" id="Figure_3_vid"
+ poster="images/animations/positive_phase_contrast/poster.png">
+ <source src="images/animations/positive_phase_contrast/animation.mp4" type="video/mp4">
+ Your browser doesn't support HTML5 MP4 video.`
+</video>
+<table class="figure_controls">
+  <tr>
+  <td style="text-align: center">Relative phase between background and scattered light:<br><em>(Click the radio buttons to change the figure)</em> </td><td><form id="Figure_3_measurement" onchange="update_figure_3()">
+    <input type="radio" name="measurement" id="positive_phase_contrast/animation.mp4" checked="checked">Constructive interference<br>
+    <input type="radio" name="measurement" id="negative_phase_contrast/animation.mp4">Destructive interference
+  </form></td></tr>
+</table>
+<figcaption><strong>Figure 3: Animation illustrating the key concepts of phase-contrast microscopy.</strong> A red light pulse illuminates a point-like particle (small circle, left). The particle scatters some of this illumination light (expanding red circle). A lens (black oval, left) focuses the illumination pulse onto a beam block (small rectangle, center), which is partially opaque and attenuates the illumination, and also retards its phase.  Any scattered light that passes through the first lens and is not absorbed by the beam block will pass through a second lens (black oval, right) toward a multi-pixel detector (camera icon, far right), forming an image of the scattering particle on a bright background.</figcaption>
+</figure>
+<p></p>
+
+<p> As illustrated in Figure 3 above, phase contrast microscopy is conceptually similar to dark-field microscopy. To convert our cartoon dark-field microscope to a phase-contrast microscope, we simply replace the opaque beam block with a partially transmissive one. The attenuated illumination beam yields a uniform background on the detector, which interferes coherently with the scattered light image. The partially transmissive beam block also retards the phase of the background, and we can control this retardation (e.g. by tuning the thickness of the block).</p>
+
+<p>For an appropriate retardation, the interference between the scattered light and the uniform background can be primarily constructive (Figure 3 with <code>Relative phase between background and scattered light: Constructive interference</code>). In this mode, scattering objects in the sample appear as if they are emitting light, and this light is imaged onto the detector on a bright background.</p>
+
+<p>It may not be immediately obvious why adding additional background to a background-free measurement merits a Nobel prize. Certainly, adding background light to an optical measurement adds additional noise
+
+[<a class="citation" href="https://doi.org/10.1007/978-0-387-45524-2" title="Handbook of Biological Confocal Microscopy, third edition; J. Pawley; Springer US, ISBN 978-0-387-25921-5, eBook ISBN 978-0-387-45524-2, Chapter 2 (2006)">Pawley 2006</a>].
 </p>
 
 <noscript>
