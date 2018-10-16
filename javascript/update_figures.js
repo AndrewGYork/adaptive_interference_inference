@@ -1,9 +1,9 @@
 // Figure 1 interactively loads static images, stored locally
 function update_figure_1() {
-  var options = ['interferometer.svg',
-                 'interferometer_x_is_one.svg',
-                 'interferometer_a_is_zero.svg',
-                 'interferometer_b_is_zero.svg']
+  var options = ['interferometer.png',
+                 'interferometer_x_is_one.png',
+                 'interferometer_a_is_zero.png',
+                 'interferometer_b_is_zero.png']
   for (var i = 0; i < 4; i++) {
     var radio_button = document.getElementById(options[i]);
     if (radio_button.checked) {
