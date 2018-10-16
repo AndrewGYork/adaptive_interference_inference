@@ -1,6 +1,6 @@
 # What is the signal-to-noise ratio of phase-contrast imaging? Can it be infinite?
 
-<a href="https://doi.org/10.5281/zenodo.XXXX"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.XXXX.svg" alt="DOI"></a>
+<a href="https://zenodo.org/badge/latestdoi/146219426"><img src="https://zenodo.org/badge/146219426.svg" alt="DOI"></a>
 
 A scientific publication, describing a way to improve microscopy. This repository hosts everything you need to reproduce our results. Read the publication here:
 https://calico.github.io/adaptive_interference_inference (hosted via the Calico Labs institutional GitHub account)
