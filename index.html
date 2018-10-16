@@ -14,7 +14,7 @@ Based on this theme: https://github.com/broccolini/dinky , which mentioned that 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="citation_title" content="What is the signal-to-noise ratio of phase-contrast imaging? Can it be infinite?">
     <meta name="citation_author" content="Andrew G. York">
-    <meta name="citation_publication_date" content="2018/09/13">
+    <meta name="citation_publication_date" content="2018/10/15">
     <meta name="citation_journal_title" content="Github.io">
     <meta name="citation_pdf_url" content="https://andrewgyork.github.io/adaptive_interference_inference/adaptive_interference_inference%20by%20AndrewGYork.pdf">
     <title>adaptive_interference_inference by AndrewGYork</title>
@@ -73,7 +73,7 @@ The real text begins here.
 </table>
 
 <h3>Peer review status</h3>
-<p>Pre-print published XXX XX, 20XX (This article is not yet peer-reviewed)</p>
+<p>Pre-print published October 15, 2018 (This article is not yet peer-reviewed)</p>
 <p>Cite as: <a href="https://doi.org/XXXX">doi:10.5281/zenodo.XXXX</a></p>
 
 <h3 class="onlyprint">
@@ -96,7 +96,7 @@ A math puzzle</h3>
 <p>Let the best algorithm win!</p>
 
 <ul>
-  <li>Can you do any better than the algorithm \(a_0 = A\), \(b_0 = 0\) ?</li>
+  <li>Can you do any better than the algorithm \(a_0 = \sqrt{A}\), \(b_0 = 0\) ?</li>
   <li>Can you do any better than an algorithm where \(a\) and \(b\) are chosen in advance, independently of \(r_k\)? For example: \(a_k = \sqrt{A/N}\) and \(b_k = \sqrt{A/N}e^{2\pi i k / N}\)</li>
 </ul>
 
@@ -247,7 +247,7 @@ A physics question</h3>
 
 an early form of "dark-field" microscopy. By 1920, dark-field microscopy was a mature, well-established technique
 
-[<a class="citation" href="https://doi.org/10.2307/3221838" title="Modern dark-field microscopy and the history of its development; S.H. Gage; ">Gage 1920</a>], and Zsigmondy was awarded the 1925 Chemistry Nobel <q>for his demonstration of the heterogenous nature of colloid solutions <a href="https://www.nobelprize.org/prizes/chemistry/1925/summary/">and for the methods he used, which have since become fundamental...</a></q>.
+[<a class="citation" href="https://doi.org/10.2307/3221838" title="Modern dark-field microscopy and the history of its development; S.H. Gage; Transactions of the American Microscopical Society Vol. 39, No. 2 pp. 95-141 Apr (1920)">Gage 1920</a>], and Zsigmondy was awarded the 1925 Chemistry Nobel <q>for his demonstration of the heterogenous nature of colloid solutions <a href="https://www.nobelprize.org/prizes/chemistry/1925/summary/">and for the methods he used, which have since become fundamental...</a></q>.
 </p>
 
 <figure id="Figure_2">
@@ -288,14 +288,41 @@ Zernike was awarded the 1953 Nobel prize in Physics <q>for his demonstration of 
 </figure>
 <p></p>
 
-<p> As illustrated in Figure 3 above, phase contrast microscopy is conceptually similar to dark-field microscopy. To convert our cartoon dark-field microscope to a phase-contrast microscope, we simply replace the opaque beam block with a partially transmissive one. The attenuated illumination beam yields a uniform background on the detector, which interferes coherently with the scattered light image. The partially transmissive beam block also retards the phase of the background, and we can control this retardation (e.g. by tuning the thickness of the block).</p>
+<p>As illustrated in Figure 3 above, phase contrast microscopy is conceptually similar to dark-field microscopy. To convert our cartoon dark-field microscope to a phase-contrast microscope, we simply replace the opaque beam block with a partially transmissive one. The attenuated illumination beam yields a uniform background on the detector, which interferes coherently with the scattered light image. The partially transmissive beam block also retards the phase of the background, and we can control this retardation (e.g. by tuning the thickness of the block).</p>
 
 <p>For an appropriate retardation, the interference between the scattered light and the uniform background can be primarily constructive (Figure 3 with <code>Relative phase between background and scattered light: Constructive interference</code>). In this mode, scattering objects in the sample appear as if they are emitting light, and this light is imaged onto the detector on a bright background.</p>
 
-<p>It may not be immediately obvious why adding additional background to a background-free measurement merits a Nobel prize. Certainly, adding background light to an optical measurement adds additional noise
+<p>It may not be immediately obvious why adding a bright background to a Nobel-prize-winning background-free measurement merits another Nobel prize. Certainly, adding background light to an optical measurement adds additional noise
 
 [<a class="citation" href="https://doi.org/10.1007/978-0-387-45524-2" title="Handbook of Biological Confocal Microscopy, third edition; J. Pawley; Springer US, ISBN 978-0-387-25921-5, eBook ISBN 978-0-387-45524-2, Chapter 2 (2006)">Pawley 2006</a>].
-</p>
+
+The critical detail is that Zernike added a bright <em>coherent</em> background, which adds both additional noise and additional signal. How much signal, and how much noise?</p>
+
+<p>The total intensity \(I\) at a pixel of the detector in Figure 3 is proportional to \(|\vec{E}_{s}|^{2} + |\vec{E}_{b}|^2 + 2 \vec{E}_{s}\cdot\vec{E}_{b}\cos{\theta}\), where \(\vec{E}_{s}\) is the electric field at that pixel due to light scattered by the point-like particle, \(\vec{E}_{b}\) is the electric field at that pixel due to the coherent background, and \(\theta\) is the relative phase between the two fields at that pixel.
+
+[<a class="citation" href="https://books.google.com/books?id=SL1n9TuJ5YMC" title="Introduction to modern optics, second edition; Grant R. Fowles; Courier Corporation, ISBN 0486659577, 9780486659572, Chapter 3 (1989)">Fowles 1989</a>].
+
+The number of photoelectrons detected at that pixel during a measurement with duration \(\tau\) is drawn from a Poisson distribution with mean \(\epsilon \tau I\) and standard deviation \(\sqrt{\epsilon \tau I}\), where \(\epsilon\) is a proportionality constant depending on properties of the detector
+
+[<a class="citation" href="https://doi.org/10.1364/AO.4.000079" title="Noise in Photoemission Current; D. L. Fried; Applied Optics Vol. 4, Issue 1, pp. 79-80 (1965) ">Fried 1965</a>].</p>
+
+<p>In the case of dark-field microscopy, \(\vec{E}_{b} = 0\). If there is no "stray" light or other noise sources, the presence of the point-like particle changes the mean number of photoelectrons detected by our pixel, from zero to \(\epsilon \tau |\vec{E}_{s}|^{2}\). The standard deviation in the number of photoelectrons is the square root of this mean. If we call the change in mean photoelectron number due to the point-like particle the "signal", and the standard deviation the "noise", the per-pixel signal-to-noise ratio of dark-field microscopy is \(\frac{\epsilon \tau |\vec{E}_{s}|^{2}}{\sqrt{\epsilon \tau |\vec{E}_{s}|^{2}}} = \sqrt{\epsilon \tau} |\vec{E}_{s}|\).</p>
+
+<p>In the case of phase contrast microscopy, the presence of the point-like particle changes the mean number of photoelectrons from \(\epsilon \tau |\vec{E}_{b}|^{2}\) to \(\epsilon \tau \left(|\vec{E}_{s}|^{2} + |\vec{E}_{b}|^2 + 2 \vec{E}_{s}\cdot\vec{E}_{b}\cos{\theta}\right)\). If the background \(\epsilon \tau |\vec{E}_{b}|^{2}\) is extremely stable and well calibrated (<a href="./index.html#physics_question" target="_self">as discussed above</a>), and we call the change in mean photoelectron number due to the point-like particle the "signal", and the standard deviation the "noise", the per-pixel signal-to-noise ratio of phase-contrast microscopy is \(\frac{\epsilon \tau \left(|\vec{E}_{s}|^{2} + |\vec{E}_{b}|^2 + 2 \vec{E}_{s}\cdot\vec{E}_{b}\cos{\theta}\right) - \epsilon \tau |\vec{E}_{b}|^{2}}{\sqrt{\epsilon \tau \left(|\vec{E}_{s}|^{2} + |\vec{E}_{b}|^2 + 2 \vec{E}_{s}\cdot\vec{E}_{b}\cos{\theta}\right)}} = \sqrt{\epsilon \tau }\frac{|\vec{E}_{s}|^{2} + 2 \vec{E}_{s}\cdot\vec{E}_{b}\cos{\theta}}{\sqrt{|\vec{E}_{s}|^{2} + |\vec{E}_{b}|^2 + 2 \vec{E}_{s}\cdot\vec{E}_{b}\cos{\theta}}}\).</p>
+
+<p>In the limits \(|\vec{E}_{s}| \ll |\vec{E}_{b}|\) (large background), \(\vec{E}_{s} \cdot \vec{E}_{b} = |\vec{E}_{s}||\vec{E}_{b}|\) (parallel fields) and \(|\cos{\theta}| \approx 1\) (retardance tuned for high-contrast interference), we can make the approximations \(|\vec{E}_{s}|^{2} \ll 2 \vec{E}_{s}\cdot\vec{E}_{b}\cos{\theta} \ll |\vec{E}_{b}|^{2}\) , and the signal-to-noise ratio of phase-constrast microscopy simplifies considerably to \(\sqrt{\epsilon \tau }\frac{2 |\vec{E}_{s}||\vec{E}_{b}|\cos{\theta}}{\sqrt{|\vec{E}_{b}|^2}} = 2\sqrt{\epsilon \tau } |\vec{E}_{s}|\cos{\theta}\). In this limit, we see that phase contrast microscopy doubles the signal-to-noise ratio of dark-field!</p>
+
+<p>I suspect that the 1953 Nobel was given for a more practical reason: in addition to doubling the signal-to-noise ratio, phase contrast microscopy (with well-tuned retardance) greatly amplifies both the photon-counting noise <em>and the signal</em>. Other sources of noise (e.g. stray light) are "washed out" by the coherently amplified signal. Zernike discusses this point in his Nobel lecture:</p>
+
+<blockquote>In my own experiments I could go down to 4-percent transmission, that is, a 5-times enhanced contrast, the limit being set by the unavoidable stray light. It is only under especially favorable circumstances that a higher increase has been attained by the French astronomer Lyot. In his study of the minute ripples of polished lens surfaces he had independently rediscovered phase contrast and could use strips that diminished the amplitude to one-thirtieth, so that ripples only one one-thousandth of a wavelength high showed in good contrast. [<a class="citation" href="https://doi.org/10.1126/science.121.3141.345" title="How I discovered phase contrast; F. Zernike; Science 121.3141 (1955): 345-349.">Zernike 1955</a>]</blockquote><p></p>
+
+<p>This raises a natural question: in the case of <em>no</em> stray light, for a given signal field \(\vec{E}_{s}\), what choice of background field amplitude \(|\vec{E}_{b}|\) and relative phase \(\theta\) will give optimal signal-to-noise ratio? Naively inspecting our previous equations leads us to a curious result. If we happen to choose a background field that perfectly cancels our signal field, that is, \(|\vec{E}_{s}|^{2} + |\vec{E}_{b}|^2 + 2 \vec{E}_{s}\cdot\vec{E}_{b}\cos{\theta} = 0\), then our noise goes to zero, but our signal does not!</p>
+
+<p>This is the origin of the question in our title, and the math, coding, and physics questions that follow. While I have no expectation that "infinite" signal-to-noise ratio allows perfect inference of our sample's optical properties, it's still highly suggestive, and interesting to explore what inference it <em>does</em> allow. For mathematical simplicity, I reduced the multi-pixel phase-contrast microscope shown in Figure 3 to the single-pixel interferometer shown in Figure 1, but clearly insight in one case leads directly to insight in the other. If the "infinite" signal-to-noise ratio case actually yields superior inference, one could imagine imaging methods that tune a multi-pixel spatial light modulator in one arm of an interferometer to cancel the fields transmitted by an unknown object in the other arm.</p>
+
+<p>I also think the underlying inference question is a timeless combination of importance and simplicity, which is why I've reduced it to a math puzzle, a coding challenge, and a physics question, rather than simply answering it. I think this document does more good as a challenge than as a reference.</p>
+
+<p>Who wants to play <a href="./index.html#math_puzzle" target="_self">my game</a>?</p>
 
 <noscript>
 <h3>Your browser doesn't seem to support Javascript. This document uses Javascript to generate a reference list, which would normally be displayed here. Either activate Javascript, or use the "Download PDF" link above if you want to see the reference list.</h3></noscript>
